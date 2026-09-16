@@ -1,0 +1,52 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Mechanics</h2>
+  <form method="get" class="form-inline mb-3">
+    <input type="text" name="city" placeholder="City" class="form-control mr-2" value="{{ request.GET.city }}">
+    <input type="text" name="q" placeholder="Name" class="form-control mr-2" value="{{ request.GET.q }}">
+    <button class="btn btn-primary">Search</button>
+  </form>
+
+  <div class="row">
+    {% for m in mechanics %}
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">{{ m.user.get_full_name|default:m.user.username }}</h5>
+            <p class="card-text">{{ m.city }}</p>
+            <a href="/mechanic/{{ m.id }}/" class="btn btn-sm btn-outline-primary">View Profile</a>
+          </div>
+        </div>
+      </div>
+    {% empty %}
+      <p>No mechanics found</p>
+    {% endfor %}
+  </div>
+
+  <!-- Map -->
+  <div id="map" style="height: 400px;" class="mt-4"></div>
+
+  <script>
+    const mechanics = [
+      {% for m in mechanics %}
+        {% if m.latitude and m.longitude %}
+          {lat: {{ m.latitude }}, lng: {{ m.longitude }}, name: "{{ m.user.get_full_name|default:m.user.username }}", id: {{ m.id }}},
+        {% endif %}
+      {% endfor %}
+    ];
+
+    if (mechanics.length > 0) {
+      const map = L.map('map').setView([mechanics[0].lat, mechanics[0].lng], 10);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      mechanics.forEach(m => {
+        L.marker([m.lat, m.lng]).addTo(map).bindPopup(`<a href="/mechanic/${m.id}/">${m.name}</a>`);
+      });
+    } else {
+      document.getElementById('map').innerHTML = '<p class="text-muted">No location data available to render map.</p>';
+    }
+  </script>
+{% endblock %}

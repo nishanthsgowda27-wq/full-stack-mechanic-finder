@@ -1,0 +1,68 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Mechanic Finder</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/site.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Mechanic Finder</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/search/">Search</a></li>
+        </ul>
+        <ul class="navbar-nav">
+          
+            <li class="nav-item"><a class="nav-link" href="/bookings/">Bookings</a></li>
+            <li class="nav-item"><a class="nav-link" href="/logout/">Logout</a></li>
+          
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      
+
+      
+  <h2>Book: Oil Change</h2>
+  <form method="post">
+    <input type="hidden" name="csrfmiddlewaretoken" value="uTrPVCCU78XpL9Y0uVWhi0XMHfzTfbNGkkRnP5OaG9cVYVZX8UEfyruKYuZnARl7">
+    <p>
+    <label for="id_service">Service:</label>
+    <select name="service" required id="id_service">
+  <option value="">---------</option>
+
+  <option value="1" selected>Oil Change - Mike One</option>
+
+  <option value="2">Brake Repair - Mike One</option>
+
+</select>
+    
+    
+  </p>
+
+  
+  <p>
+    <label for="id_booking_date">Booking date:</label>
+    <input type="datetime-local" name="booking_date" required id="id_booking_date">
+    
+    
+      
+    
+  </p>
+    <button class="btn btn-success">Request Booking</button>
+  </form>
+
+    </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Leaflet CSS/JS for maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2j2LFQ+QG4c5gQwE4gJkF5Hjz4JYv+3GJm2wSZo=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j6k8tbQv3b4bqQv6vD1Qm6s6z3vN3gXQ5x2A9zM=" crossorigin=""></script>
+  </body>
+</html>

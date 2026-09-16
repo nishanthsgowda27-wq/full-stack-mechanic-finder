@@ -1,0 +1,17 @@
+/* Basic site styles for Mechanic Finder */
+body {
+  padding-top: 70px;
+}
+
+.navbar-brand {
+  font-weight: 600;
+}
+
+.card .card-body img {
+  max-width: 100%;
+  height: auto;
+}
+
+.alert {
+  margin-top: 10px;
+}

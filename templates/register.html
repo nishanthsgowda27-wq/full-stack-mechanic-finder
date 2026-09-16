@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Register {{ user_type }}</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+      <div class="col-md-6">
+        {{ form.as_p }}
+      </div>
+      <div class="col-md-6">
+        {{ profile_form.as_p }}
+      </div>
+    </div>
+    <button class="btn btn-primary">Register</button>
+  </form>
+{% endblock %}

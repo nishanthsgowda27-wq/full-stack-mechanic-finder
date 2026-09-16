@@ -1,0 +1,86 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Mechanic Finder</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="/static/css/site.css">
+  </head>
+  <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <a class="navbar-brand" href="/">Mechanic Finder</a>
+      <div class="collapse navbar-collapse">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item"><a class="nav-link" href="/search/">Search</a></li>
+        </ul>
+        <ul class="navbar-nav">
+          
+            <li class="nav-item"><a class="nav-link" href="/login/">Login</a></li>
+            <li class="nav-item"><a class="nav-link" href="/register/">Register</a></li>
+          
+        </ul>
+      </div>
+    </nav>
+
+    <div class="container mt-4">
+      
+
+      
+  <h2>Mechanics</h2>
+  <form method="get" class="form-inline mb-3">
+    <input type="text" name="city" placeholder="City" class="form-control mr-2" value="">
+    <input type="text" name="q" placeholder="Name" class="form-control mr-2" value="mech3">
+    <button class="btn btn-primary">Search</button>
+  </form>
+
+  <div class="row">
+    
+      <div class="col-md-4">
+        <div class="card mb-3">
+          <div class="card-body">
+            <h5 class="card-title">Alan Three</h5>
+            <p class="card-text">Capital City</p>
+            <a href="/mechanic/8/" class="btn btn-sm btn-outline-primary">View Profile</a>
+          </div>
+        </div>
+      </div>
+    
+  </div>
+
+  <!-- Map -->
+  <div id="map" style="height: 400px;" class="mt-4"></div>
+
+  <script>
+    const mechanics = [
+      
+        
+          {lat: 39.500000, lng: -76.000000, name: "Alan Three", id: 8},
+        
+      
+    ];
+
+    if (mechanics.length > 0) {
+      const map = L.map('map').setView([mechanics[0].lat, mechanics[0].lng], 10);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      mechanics.forEach(m => {
+        L.marker([m.lat, m.lng]).addTo(map).bindPopup(`<a href="/mechanic/${m.id}/">${m.name}</a>`);
+      });
+    } else {
+      document.getElementById('map').innerHTML = '<p class="text-muted">No location data available to render map.</p>';
+    }
+  </script>
+
+    </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Leaflet CSS/JS for maps -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-sA+e2j2LFQ+QG4c5gQwE4gJkF5Hjz4JYv+3GJm2wSZo=" crossorigin=""/>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-o9N1j6k8tbQv3b4bqQv6vD1Qm6s6z3vN3gXQ5x2A9zM=" crossorigin=""></script>
+  </body>
+</html>

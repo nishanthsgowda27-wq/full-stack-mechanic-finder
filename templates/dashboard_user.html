@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>User Dashboard</h2>
+  <p>Welcome, {{ profile.user.get_full_name }} ({{ profile.user.username }})</p>
+
+  <h4>Your bookings</h4>
+  <h5 class="mt-3">Pending</h5>
+  <ul class="list-group mb-3">
+    {% for b in pending_bookings %}
+      <li class="list-group-item">{{ b.service }} on {{ b.booking_date }} - {{ b.status }}</li>
+    {% empty %}
+      <li class="list-group-item">No pending bookings</li>
+    {% endfor %}
+  </ul>
+
+  <h5>Confirmed</h5>
+  <ul class="list-group mb-3">
+    {% for b in confirmed_bookings %}
+      <li class="list-group-item">{{ b.service }} on {{ b.booking_date }}</li>
+    {% empty %}
+      <li class="list-group-item">No confirmed bookings</li>
+    {% endfor %}
+  </ul>
+
+  <h5>Rejected</h5>
+  <ul class="list-group mb-3">
+    {% for b in rejected_bookings %}
+      <li class="list-group-item">{{ b.service }} on {{ b.booking_date }}</li>
+    {% empty %}
+      <li class="list-group-item">No rejected bookings</li>
+    {% endfor %}
+  </ul>
+
+  <h5>Completed</h5>
+  <ul class="list-group mb-3">
+    {% for b in completed_bookings %}
+      <li class="list-group-item">{{ b.service }} on {{ b.booking_date }}</li>
+    {% empty %}
+      <li class="list-group-item">No completed bookings</li>
+    {% endfor %}
+  </ul>
+{% endblock %}

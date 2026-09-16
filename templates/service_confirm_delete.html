@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Delete Service</h2>
+  <p>Are you sure you want to delete <strong>{{ service.service_name }}</strong>?</p>
+  <form method="post">
+    {% csrf_token %}
+    <button class="btn btn-danger">Yes, delete</button>
+    <a href="/dashboard/mechanic/" class="btn btn-secondary">Cancel</a>
+  </form>
+{% endblock %}

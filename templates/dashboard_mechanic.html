@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+
+{% block content %}
+  <h2>Mechanic Dashboard</h2>
+  <p>Welcome, {{ profile.user.get_full_name }} ({{ profile.user.username }})</p>
+
+  <h4>Your services</h4>
+  <a href="/service/add/" class="btn btn-sm btn-success mb-2">Add Service</a>
+  <ul class="list-group">
+    {% for s in services %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ s.service_name }}</strong> - {{ s.price }}
+          <p class="mb-1">{{ s.description }}</p>
+        </div>
+        <div>
+          <a href="/service/{{ s.id }}/edit/" class="btn btn-sm btn-outline-primary">Edit</a>
+          <a href="/service/{{ s.id }}/delete/" class="btn btn-sm btn-outline-danger">Delete</a>
+        </div>
+      </li>
+    {% empty %}
+      <li class="list-group-item">No services</li>
+    {% endfor %}
+  </ul>
+
+  <h4 class="mt-4">Received bookings</h4>
+  <h5 class="mt-3">Pending</h5>
+  <ul class="list-group mb-3">
+    {% for b in pending_bookings %}
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        <div>
+          <strong>{{ b.service }}</strong> - {{ b.user }} on {{ b.booking_date }}
+        </div>
+        <div>
+          <form method="post" action="{% url 'service:accept_booking' b.pk %}" style="display:inline; margin-right:8px;">{% csrf_token %}<button class="btn btn-sm btn-success">Accept</button></form>
+          <form method="post" action="{% url 'service:reject_booking' b.pk %}" style="display:inline;">{% csrf_token %}<button class="btn btn-sm btn-outline-danger">Reject</button></form>
+        </div>
+      </li>
+    {% empty %}
+      <li class="list-group-item">No pending bookings</li>
+    {% endfor %}
+  </ul>
+
+  <h5>Confirmed</h5>
+  <ul class="list-group mb-3">
+    {% for b in confirmed_bookings %}
+      <li class="list-group-item">{{ b.service }} - {{ b.user }} on {{ b.booking_date }}</li>
+    {% empty %}
+      <li class="list-group-item">No confirmed bookings</li>
+    {% endfor %}
+  </ul>
+
+  <h5>Rejected</h5>
+  <ul class="list-group mb-3">
+    {% for b in rejected_bookings %}
+      <li class="list-group-item">{{ b.service }} - {{ b.user }} on {{ b.booking_date }}</li>
+    {% empty %}
+      <li class="list-group-item">No rejected bookings</li>
+    {% endfor %}
+  </ul>
+
+  <h5>Completed</h5>
+  <ul class="list-group mb-3">
+    {% for b in completed_bookings %}
+      <li class="list-group-item">{{ b.service }} - {{ b.user }} on {{ b.booking_date }}</li>
+    {% empty %}
+      <li class="list-group-item">No completed bookings</li>
+    {% endfor %}
+  </ul>
+{% endblock %}
