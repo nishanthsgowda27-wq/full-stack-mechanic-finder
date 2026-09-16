@@ -2,12 +2,6 @@
 
 This is a Django project named `mechanic_finder` with an app `service` that allows users to find mechanics, view profiles, book services, and manage bookings.
 
-Team Members:
-1. A S Nishanth - 4MC23IS001
-2. Chethan H R - 4MC23IS024
-3. Harish H R - 4MC23IS038
-4. Jeevan H K - 4MC23IS049
-5. Varun K M - 4MC23IS130
 
 Steps on how to set up and run the project
 1. Create and activate a virtualenv
